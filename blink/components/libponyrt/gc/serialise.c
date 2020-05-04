@@ -7,9 +7,9 @@
 #include "ponyassert.h"
 #include <string.h>
 
-#if defined(PLATFORM_IS_POSIX_BASED)
+#if defined(PLATFORM_IS_POSIX_BASED) && !defined(PLATFORM_IS_XTENSA)
 #include <dlfcn.h>
-#else
+#elif defined(PLATFORM_IS_WINDOWS)
 #include <Windows.h>
 #endif
 
