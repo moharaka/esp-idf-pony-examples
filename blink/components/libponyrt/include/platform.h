@@ -21,11 +21,14 @@
 #  define PONY_EXTERN_C_END
 #endif
 
+
 /** Determines the operating system.
  *
  */
 #if defined(__APPLE__) && defined(__MACH__)
 #  define PLATFORM_IS_MACOSX
+#elif defined(__XTENSA__)
+#	define PLATFORM_IS_XTENSA
 #elif defined(__linux__)
 #  define PLATFORM_IS_LINUX
 #elif defined(__FreeBSD__)
@@ -105,7 +108,7 @@
 #  error PLATFORM NOT SUPPORTED!
 #endif
 
-#if defined(PLATFORM_IS_MACOSX) || defined(PLATFORM_IS_LINUX) || defined (PLATFORM_IS_BSD)
+#if defined(PLATFORM_IS_MACOSX) || defined(PLATFORM_IS_LINUX) || defined (PLATFORM_IS_BSD) || defined (PLATFORM_IS_XTENSA)
 #  define PLATFORM_IS_POSIX_BASED
 #endif
 
