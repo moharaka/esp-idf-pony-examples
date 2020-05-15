@@ -224,6 +224,7 @@ PONY_API bool pony_os_fstat(int fd, const char* path, pony_stat_t* p)
 #endif
 }
 
+#if XTENSA_FIXME
 PONY_API bool pony_os_stat(const char* path, pony_stat_t* p)
 {
 #if defined(PLATFORM_IS_WINDOWS)
@@ -260,5 +261,6 @@ PONY_API bool pony_os_stat(const char* path, pony_stat_t* p)
   return true;
 #endif
 }
+#endif
 
 PONY_EXTERN_C_END

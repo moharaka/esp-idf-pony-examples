@@ -47,6 +47,7 @@ static void tm_to_date(struct tm* tm, int nsec, date_t* date)
   date->day_of_year = tm->tm_yday;
 }
 
+#if XTENSA_FIXME
 PONY_API int64_t ponyint_timegm(date_t* date)
 {
   struct tm tm;
@@ -58,6 +59,7 @@ PONY_API int64_t ponyint_timegm(date_t* date)
   return timegm(&tm);
 #endif
 }
+#endif
 
 PONY_API void ponyint_gmtime(date_t* date, int64_t sec, int64_t nsec)
 {

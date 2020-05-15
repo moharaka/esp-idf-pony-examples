@@ -4,7 +4,11 @@
 #include "../asio/asio.h"
 
 #ifndef PLATFORM_IS_WINDOWS
-#include <poll.h>
+# if defined(PLATFORM_IS_XTENSA)
+# include <sys/poll.h>
+# else
+# include <poll.h>
+# endif
 #include <termios.h>
 #include <unistd.h>
 #include <stdlib.h>

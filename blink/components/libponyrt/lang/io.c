@@ -11,7 +11,7 @@ PONY_EXTERN_C_BEGIN
 
 PONY_API int pony_os_writev_max()
 {
-#if defined(PLATFORM_IS_POSIX_BASED)
+#if defined(PLATFORM_IS_POSIX_BASED) && !defined(PLATFORM_IS_XTENSA)
   return IOV_MAX;
 #else
   return 1;

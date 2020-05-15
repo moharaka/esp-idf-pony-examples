@@ -157,6 +157,7 @@ PONY_API int ponyint_o_trunc()
 
 #if defined(PLATFORM_IS_POSIX_BASED)
 
+#if XTENSA_FIXME
 PONY_API int ponyint_o_directory()
 {
   return O_DIRECTORY;
@@ -166,6 +167,7 @@ PONY_API int ponyint_o_cloexec()
 {
   return O_CLOEXEC;
 }
+#endif
 
 #if !defined(PLATFORM_IS_MACOSX)
 PONY_API int ponyint_at_removedir()
@@ -185,7 +187,7 @@ PONY_API const char* ponyint_unix_readdir(DIR* dir)
     if(d == NULL)
       break;
 
-#if defined(PLATFORM_IS_LINUX)
+#if defined(PLATFORM_IS_LINUX) || defined(PLATFORM_IS_XTENSA)
     size_t len = strlen(d->d_name);
 #elif defined(PLATFORM_IS_BSD) || defined(PLATFORM_IS_MACOSX)
     size_t len = d->d_namlen;
