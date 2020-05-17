@@ -85,6 +85,10 @@ typedef int SOCKET;
 // TODO
 #endif
 
+#ifdef PLATFORM_IS_XTENSA
+const struct in6_addr in6addr_loopback = IN6ADDR_LOOPBACK_INIT;
+#endif
+
 PONY_EXTERN_C_BEGIN
 
 PONY_API void pony_os_socket_close(int fd);
