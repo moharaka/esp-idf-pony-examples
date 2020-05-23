@@ -156,6 +156,7 @@ uint32_t ponyint_numa_node_of_cpu(uint32_t cpu)
 
 #endif
 
+#if XTENSA_FIXME
 bool ponyint_thread_create(pony_thread_id_t* thread, thread_fn start,
   uint32_t cpu, void* arg)
 {
@@ -210,6 +211,7 @@ bool ponyint_thread_create(pony_thread_id_t* thread, thread_fn start,
 #endif
   return ret;
 }
+#endif
 
 bool ponyint_thread_join(pony_thread_id_t thread)
 {
