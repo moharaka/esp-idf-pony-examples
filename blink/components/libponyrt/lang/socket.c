@@ -754,6 +754,7 @@ PONY_API int pony_os_connect_tcp6(pony_actor_t* owner, const char* host,
     IPPROTO_TCP, asio_flags);
 }
 
+#if XTENSA_FIXME
 PONY_API int pony_os_accept(asio_event_t* ev)
 {
 #if defined(PLATFORM_IS_WINDOWS)
@@ -776,6 +777,7 @@ PONY_API int pony_os_accept(asio_event_t* ev)
 
   return (int)ns;
 }
+#endif
 
 // Check this when a connection gets its first writeable event.
 // API deprecated: use TCPConnection._is_sock_connected or UDPSocket.get_so_error
@@ -804,6 +806,7 @@ static int address_family(int length)
   return -1;
 }
 
+#if XTENSA_FIXME
 PONY_API bool pony_os_nameinfo(ipaddress_t* ipaddr, char** rhost, char** rserv,
   bool reversedns, bool servicename)
 {
@@ -841,6 +844,7 @@ PONY_API bool pony_os_nameinfo(ipaddress_t* ipaddr, char** rhost, char** rserv,
 
   return true;
 }
+#endif
 
 PONY_API struct addrinfo* pony_os_addrinfo(int family, const char* host,
   const char* service)
