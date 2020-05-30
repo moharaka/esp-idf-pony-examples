@@ -19,6 +19,10 @@
 #include <valgrind/helgrind.h>
 #endif
 
+#ifndef PONY_VERSION_STR
+#define PONY_VERSION_STR "0.33.2-0ba1d6ad"
+#endif
+
 typedef struct options_t
 {
   // concurrent options

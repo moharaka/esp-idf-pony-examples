@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.11 FATAL_ERROR)
 
 project(libponyrt VERSION ${PONYC_PROJECT_VERSION} LANGUAGES C CXX)
 
+set(PONYC_VERSION "0.33.2-0ba1d6ad")
+set(PONY_VERSION "0.33.2-0ba1d6ad")
+
 set(_c_src
     actor/actor.c
     actor/messageq.c
