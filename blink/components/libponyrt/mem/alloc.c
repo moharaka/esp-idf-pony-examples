@@ -5,7 +5,10 @@
 #include <string.h>
 #include <stdio.h>
 
-#define PAGE_SIZE 4096
+#ifdef PLATFORM_IS_XTENSA
+#define ALLOC_PAGE_ALIGN 256
+#include <esp_heap_caps.h>
+#endif
 
 #if defined PLATFORM_IS_POSIX_BASED && undefined PLATFORM_IS_XTENSA
 #include <sys/mman.h>
@@ -48,8 +51,9 @@ void* ponyint_virt_alloc(size_t bytes)
 #endif
   if(p == MAP_FAILED)
     ok = false;
-#else
-  if (posix_memalign(&p, sysconf(_SC_PAGESIZE), bytes) != 0) {
+#elif defined PLATFORM_IS_XTENSA
+  p = heap_caps_aligned_alloc(ALLOC_PAGE_ALIGN, bytes, MALLOC_CAP_DEFAULT);
+  if (!p) {
     ok = false; /* LCOV_EXCL_LINE */
   }               /* LCOV_EXCL_LINE */
 #endif
@@ -69,7 +73,7 @@ void ponyint_virt_free(void* p, size_t bytes)
   VirtualFree(p, 0, MEM_RELEASE);
 #elif defined(PLATFORM_IS_POSIX_BASED) && undefined PLATFORM_IS_XTENSA
   munmap(p, bytes);
-#else
-  free(p);
+#elif defined PLATFORM_IS_XTENSA
+  heap_caps_aligned_free(p);
 #endif
 }
