@@ -50,9 +50,11 @@ bool ponyint_asio_start()
   if(running_base.backend == NULL)
     return false;
 
+#if XTENSA_FIXME
   if(!ponyint_thread_create(&running_base.tid, ponyint_asio_backend_dispatch,
     asio_cpu, running_base.backend))
     return false;
+#endif
 
   return true;
 }
