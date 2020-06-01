@@ -33,8 +33,12 @@ void ponyint_assert_fail(const char* expr, const char* file, size_t line,
   {
     // If the guard is already set, an assertion fired in another thread. The
     // things here aren't thread safe, so we just start an infinite loop.
+#ifdef PLATFORM_IS_XTENSA
+    usleep(1000);
+#else
     struct timespec ts = {1, 0};
     nanosleep(&ts, NULL);
+#endif
   }
 
   fprintf(stderr, "%s:" __zu ": %s: Assertion `%s` failed.\n\n", file, line,
