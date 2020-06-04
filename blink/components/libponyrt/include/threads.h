@@ -2,6 +2,7 @@
 #define PLATFORM_THREADS_H
 
 #include <stdbool.h>
+#define USE_SCHEDULER_SCALING_PTHREADS 1
 
 /** Multithreading support.
  *
@@ -64,5 +65,6 @@ void ponyint_thread_suspend(pony_signal_event_t signal);
 #endif
 
 int ponyint_thread_wake(pony_thread_id_t thread, pony_signal_event_t signal);
+
 
 #endif

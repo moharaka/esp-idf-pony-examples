@@ -1184,6 +1184,7 @@ bool ponyint_os_sockets_init()
   closesocket(s);
 #endif
 
+#ifdef XTENSA_FIXME
 #ifdef PLATFORM_IS_POSIX_BASED
   // Ignore SIGPIPE to prevent writing to closed sockets, pipes, etc, from
   // raising a signal. If a program needs SIGPIPE, it can be accessed via the
@@ -1198,6 +1199,9 @@ bool ponyint_os_sockets_init()
 #endif
 
   return true;
+#else
+  return false;
+#endif
 }
 
 void ponyint_os_sockets_final()
