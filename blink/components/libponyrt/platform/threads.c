@@ -156,7 +156,6 @@ uint32_t ponyint_numa_node_of_cpu(uint32_t cpu)
 
 #endif
 
-#if XTENSA_FIXME
 bool ponyint_thread_create(pony_thread_id_t* thread, thread_fn start,
   uint32_t cpu, void* arg)
 {
@@ -171,6 +170,7 @@ bool ponyint_thread_create(pony_thread_id_t* thread, thread_fn start,
 
   *thread = (HANDLE)p;
 #else
+#if XTENSA_FIXME
   bool setstack_called = false;
   struct rlimit limit;
   pthread_attr_t attr;
@@ -204,9 +204,13 @@ bool ponyint_thread_create(pony_thread_id_t* thread, thread_fn start,
   } else {
     attr_p = NULL;
   }
+#else
+  pthread_attr_t* attr_p = NULL;
+#endif
 
   if(pthread_create(thread, attr_p, start, arg))
     ret = false;
+#if XTENSA_FIXME
   pthread_attr_destroy(&attr);
 #endif
   return ret;
